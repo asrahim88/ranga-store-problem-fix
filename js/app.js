@@ -10,12 +10,11 @@ const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   
   for (const product of allProducts) {
-    console.log(product.rating)
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
-      <div>
+      <div class = 'flex justify-center pb-4'>
     <img class="product-image" src=${image}></img>
       </div>
       <h3>${product.title}</h3>
