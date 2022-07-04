@@ -8,12 +8,12 @@ const loadProducts = () => {
 // show all product in UI 
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
-  
+
   for (const product of allProducts) {
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
+    div.innerHTML = `<div class="single-product hover:bg-gray-800 hover:text-white">
       <div class = 'flex justify-center pb-4'>
     <img class="product-image" src=${image}></img>
       </div>
@@ -21,9 +21,16 @@ const showProducts = (products) => {
       <p>Category: ${product.category}</p>
       <P>Avr rating: ${product.rating.rate} </P>
       <p>Total rating: ${product.rating.count}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success" >add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <h2 class = 'mb-4'>Price: $ ${product.price}</h2>
+
+          <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="w-auto text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-blue-800" >add to cart</button>
+      
+          <button
+          class="w-auto text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-blue-800"
+          type="button" data-modal-toggle="medium-modal">
+          show details
+        </button>
+      </div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -35,7 +42,7 @@ const addToCart = (id, price) => {
 
   updateTaxAndCharge();
   document.getElementById("total-Products").innerText = count;
-  updateTotal ();
+  updateTotal();
 };
 
 const getInputValue = (id) => {
@@ -76,9 +83,11 @@ const updateTaxAndCharge = () => {
 
 //grandTotal update function
 const updateTotal = () => {
-    const grandTotal = getInputValue("price") + getInputValue("delivery-charge") + getInputValue("total-tax");
-    
+  const grandTotal = getInputValue("price") + getInputValue("delivery-charge") + getInputValue("total-tax");
+
   document.getElementById("total").innerText = grandTotal;
 };
+
+
 loadProducts();
 
