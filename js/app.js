@@ -27,7 +27,7 @@ const showProducts = (products) => {
       
           <button
           class="w-auto text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-blue-800"
-          type="button" data-modal-toggle="medium-modal">
+          type="button" data-modal-toggle="medium-modal" onclick = 'getDetails(${product.id})'>
           show details
         </button>
       </div>
@@ -88,6 +88,19 @@ const updateTotal = () => {
   document.getElementById("total").innerText = grandTotal;
 };
 
+const getDetails = async (id) => {
+  const url = `https://fakestoreapi.com/products/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  showDetails(data);
+};
 
+const showDetails = (data) => {
+  document.getElementById("img").src = data.image;
+  document.getElementById("title").innerText = data.title;
+  document.getElementById("category").innerText = data.category;
+  document.getElementById("description").innerText = data.description;
+
+};
 loadProducts();
 
